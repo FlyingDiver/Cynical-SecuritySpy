@@ -1,0 +1,61 @@
+<!-- Copyright 2011-2016 Perry The Cynic. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Events>
+    <Event id="cameramotion">
+        <Name>Camera Motion</Name>
+        <ConfigUI>
+			<Field id="camera" type="menu"
+				tooltip="Camera detecting motion">
+				<List class="indigo.devices" filter="self.camera"/>
+				<Label>Camera:</Label>
+			</Field>
+            <Field id="throttle" type="textfield" defaultValue="10">
+                <Label>Maximum rate:</Label>
+            </Field>
+            <Field id="type" type="menu" defaultValue="recording">
+				<List>
+					<Option value="recording">Motion Capture</Option>
+					<Option value="action">SecuritySpy Actions</Option>
+					<Option value="raw">Specified</Option>
+				</List>
+				<Label>Detection:</Label>
+            </Field>
+            <!-- Conditional (type recording|action): trigger reason -->
+            <Field id="reason" type="menu" defaultValue="any"
+					visibleBindingId="type" visibleBindingValue="recording,action">
+				<List class="self" method="TriggerReasonFilter"/>
+				<Label>Reason:</Label>
+            </Field>
+            <!-- Conditional (type==raw): detection type and threshold -->
+            <Field id="recogtype" type="menu" defaultValue="raw"
+					visibleBindingId="type" visibleBindingValue="raw">
+				<List>
+					<Option value="raw">Anything</Option>
+					<Option value="human">Human</Option>
+					<Option value="vehicle">Vehicle</Option>
+				</List>
+				<Label>Detect:</Label>
+            </Field>
+            <Field id="threshold" type="textfield" defaultValue="50"
+					visibleBindingId="type" visibleBindingValue="raw">
+				<Label>Threshold:</Label>
+            </Field>
+            <Field id="negate" type="checkbox" defaultValue="False"
+					visibleBindingId="type" visibleBindingValue="raw">
+				<Label>Negate:</Label>
+            </Field>
+        </ConfigUI>
+    </Event>
+</Events>

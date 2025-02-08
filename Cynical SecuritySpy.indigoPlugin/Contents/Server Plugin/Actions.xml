@@ -1,0 +1,175 @@
+<!-- Copyright 2011-2016 Perry The Cynic. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Actions>
+    <Action id="setactive" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Make Active</Name>
+        <CallbackMethod>set_active</CallbackMethod>
+    </Action>
+
+    <Action id="setpassive" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Make Passive</Name>
+        <CallbackMethod>set_passive</CallbackMethod>
+    </Action>
+
+    <Action id="toggleactive" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Toggle Active</Name>
+        <CallbackMethod>toggle_active</CallbackMethod>
+    </Action>
+
+    <Action id="arm" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Arm Camera</Name>
+        <CallbackMethod>set_arm</CallbackMethod>
+		<ConfigUI>
+		    <Field id="type" type="menu" defaultValue="motion">
+			    <List>
+					<Option value="MotionCapture">Motion</Option>
+					<Option value="ContinuousCapture">Continuous</Option>
+					<Option value="Actions">Actions</Option>
+		        </List>
+			    <Label>Type</Label>
+		    </Field>
+		    <Field id="value" type="menu" defaultValue="true">
+			    <List>
+				    <Option value="arm">Arm (enable)</Option>
+				    <Option value="disarm">Disarm (disable)</Option>
+				    <Option value="toggle">Toggle (change)</Option>
+			    </List>
+		    </Field>
+		</ConfigUI>
+    </Action>
+
+    <Action id="record" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Trigger Recording</Name>
+        <CallbackMethod>trigger_recording</CallbackMethod>
+    </Action>
+
+    <Action id="setsensitivity" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Set Motion Sensitivity</Name>
+        <CallbackMethod>set_sensitivity</CallbackMethod>
+        <ConfigUI>
+            <Field id="sensitivity" type="textfield" defaultValue="50">
+                <Label>Sensitivity:</Label>
+            </Field>
+        </ConfigUI>
+    </Action>
+
+    <Action id="setoverlay" deviceFilter="indigo.device,self.camera" uiPath="DeviceActions">
+        <Name>Set Overlay</Name>
+        <CallbackMethod>set_overlay</CallbackMethod>
+        <ConfigUI>
+            <Field id="text" type="textfield">
+                <Label>Message:</Label>
+            </Field>
+            <Field id="pointsize" type="textfield" defaultValue="12">
+                <Label>Font Size:</Label>
+            </Field>
+            <Field id="position" type="menu" defaultValue="0">
+				<List>
+					<Option value="0">Top Left</Option>
+					<Option value="1">Top Right</Option>
+					<Option value="2">Bottom Left</Option>
+					<Option value="3">Bottom Right</Option>
+				</List>
+                <Label>Screen Position:</Label>
+            </Field>
+        </ConfigUI>
+    </Action>
+
+    <Action id="ptzmotion" uiPath="DeviceActions">
+        <Name>Move Camera</Name>
+        <CallbackMethod>ptz_motion</CallbackMethod>
+        <ConfigUI>
+			<Field type="menu" id="device" tooltip="Camera name">
+				<List class="self" method="PTZFilter" filter="1"/>
+				<Label>Camera:</Label>
+			</Field>
+            <Field id="motion" type="menu" defaultValue="99">
+				<List>
+					<Option value="1">Move Left</Option>
+					<Option value="2">Move Right</Option>
+					<Option value="3">Move Up</Option>
+					<Option value="4">Move Down</Option>
+					<Option value="4">Move Down</Option>
+					<Option value="8">Move Up&amp;Left</Option>
+					<Option value="9">Move Up&amp;Right</Option>
+					<Option value="10">Move Down&amp;Left</Option>
+					<Option value="11">Move Down&amp;Right</Option>
+					<Option value=""> - </Option>
+					<Option value="5">Zoom In</Option>
+					<Option value="6">Zoom Out</Option>
+					<Option value=""> - </Option>
+					<Option value="7">Home</Option>
+					<Option value="99">Stop Movement</Option>
+				</List>
+                <Label>Camera Motion:</Label>
+            </Field>
+        </ConfigUI>
+    </Action>
+
+    <Action id="ptzpreset" uiPath="DeviceActions">
+        <Name>Position Preset</Name>
+        <CallbackMethod>ptz_preset</CallbackMethod>
+        <ConfigUI>
+			<Field type="menu" id="device" tooltip="Camera name">
+				<List class="self" method="PTZFilter" filter="8"/>
+				<Label>Camera:</Label>
+			</Field>
+            <Field id="preset" type="menu" defaultValue="12">
+				<List>
+					<Option value="12">Preset #1</Option>
+					<Option value="13">Preset #2</Option>
+					<Option value="14">Preset #3</Option>
+					<Option value="15">Preset #4</Option>
+					<Option value="16">Preset #5</Option>
+					<Option value="17">Preset #6</Option>
+					<Option value="18">Preset #7</Option>
+					<Option value="19">Preset #8</Option>
+				</List>
+                <Label>Preset Number:</Label>
+            </Field>
+			<Field id="save" type="checkbox" defaultValue="no"
+				tooltip="Check to save the current position as this preset">
+				<Label>Save:</Label>
+			</Field>
+        </ConfigUI>
+    </Action>
+
+    <Action id="serveractions" uiPath="DeviceActions"><Name> - </Name></Action>
+
+    <Action id="runscript" deviceFilter="indigo.device,self.server" uiPath="DeviceActions">
+        <Name>Run Script</Name>
+        <CallbackMethod>run_script</CallbackMethod>
+        <ConfigUI>
+			<Field id="name" type="menu"
+				tooltip="SecuritySpy server script">
+				<List class="self" method="ServerObjectFilter" filter="scripts"/>
+				<Label>Script Name:</Label>
+			</Field>
+        </ConfigUI>
+    </Action>
+
+    <Action id="playsound" deviceFilter="indigo.device,self.server" uiPath="DeviceActions">
+        <Name>Play Sound</Name>
+        <CallbackMethod>play_sound</CallbackMethod>
+        <ConfigUI>
+			<Field id="name" type="menu"
+				tooltip="SecuritySpy server script">
+				<List class="self" method="ServerObjectFilter" filter="sounds"/>
+				<Label>Script Name:</Label>
+			</Field>
+        </ConfigUI>
+    </Action>
+
+</Actions>

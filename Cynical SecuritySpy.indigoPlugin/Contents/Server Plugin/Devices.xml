@@ -1,0 +1,134 @@
+<!-- Copyright 2011-2016 Perry The Cynic. All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Devices>
+	<Device type="custom" id="server">
+		<Name>Server</Name>
+		<States>
+			<State id="state" defaultValue="preparing">
+				<ValueType>
+					<List>
+						<Option value="preparing">Preparing</Option>
+						<Option value="ready">Ready</Option>
+						<Option value="unavailable">Unavailable</Option>
+					</List>
+				</ValueType>
+				<TriggerLabel>Server State</TriggerLabel>
+				<ControlPageLabel>State</ControlPageLabel>
+			</State>
+			<State id="version">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Version</TriggerLabel>
+				<ControlPageLabel>Version</ControlPageLabel>
+			</State>
+		</States>
+		<UiDisplayStateId>state</UiDisplayStateId>
+		<ConfigUI>
+			<Field id="xaddress" type="textfield"
+				tooltip="Host name or address">
+				<Label>Host:</Label>
+			</Field>
+			<Field id="port" type="textfield" defaultValue="8000"
+				tooltip="Web Server Port number">
+				<Label>Port:</Label>
+			</Field>
+			<Field id="username" type="textfield" defaultValue=""
+				tooltip="Username for SecuritySpy web server access. Leave blank for none.">
+				<Label>Username:</Label>
+			</Field>
+			<Field id="password" type="textfield" defaultValue="" secure="true"
+				tooltip="Password for SecuritySpy web server access. Leave blank for none.">
+				<Label>Password:</Label>
+			</Field>
+  			<Field type="separator"/>
+            <Field id="errors" type="checkbox"
+            	tooltip="Write errors reported by SecuritySpy to Indigo log.">
+                <Label>Report SecuritySpy Errors:</Label>
+            </Field>
+		<!-- virtual address field -->
+ 		<Field id="address" type="textfield" hidden="true"/>
+		</ConfigUI>
+	</Device>
+
+	<Device type="custom" id="camera">
+		<Name>Camera</Name>
+		<States>
+			<State id="state" defaultValue="preparing">
+				<ValueType>
+					<List>
+						<Option value="preparing">Preparing</Option>
+						<Option value="passive">Passive</Option>
+						<Option value="active">Active</Option>
+						<Option value="disconnected">Disconnected</Option>
+						<Option value="unavailable">Unavailable</Option>
+					</List>
+				</ValueType>
+				<TriggerLabel>Camera State</TriggerLabel>
+				<ControlPageLabel>State</ControlPageLabel>
+			</State>
+			<State id="type" defaultValue="">
+				<ValueType>String</ValueType>
+				<TriggerLabel>Device Type</TriggerLabel>
+				<ControlPageLabel>Type</ControlPageLabel>
+			</State>
+			<State id="sensitivity">
+				<ValueType>Integer</ValueType>
+				<TriggerLabel>Motion Sensitivity</TriggerLabel>
+				<ControlPageLabel>Sensitivity</ControlPageLabel>
+			</State>
+			<State id="separator">
+				<ValueType>Separator</ValueType>
+			</State>
+			<State id="width">
+				<ValueType>Integer</ValueType>
+				<TriggerLabel>Width</TriggerLabel>
+				<ControlPageLabel>Width</ControlPageLabel>
+			</State>
+			<State id="height">
+				<ValueType>Integer</ValueType>
+				<TriggerLabel>Height</TriggerLabel>
+				<ControlPageLabel>Height</ControlPageLabel>
+			</State>
+			<State id="separator">
+				<ValueType>Separator</ValueType>
+			</State>
+			<State id="recording">
+				<ValueType boolType="OnOff">Boolean</ValueType>
+				<TriggerLabel>Recording</TriggerLabel>
+				<ControlPageLabel>Recording</ControlPageLabel>
+			</State>
+			<State id="motion">
+				<ValueType boolType="OnOff">Boolean</ValueType>
+				<TriggerLabel>Motion</TriggerLabel>
+				<ControlPageLabel>Motion</ControlPageLabel>
+			</State>
+			<State id="actions">
+				<ValueType boolType="OnOff">Boolean</ValueType>
+				<TriggerLabel>Actions</TriggerLabel>
+				<ControlPageLabel>Actions</ControlPageLabel>
+			</State>
+		</States>
+		<UiDisplayStateId>state</UiDisplayStateId>
+		<ConfigUI>
+			<Field type="menu" id="xaddress" defaultValue=""
+				tooltip="Camera name">
+				<List class="self" method="CameraFilter"/>
+				<Label>Camera:</Label>
+			</Field>
+			<!-- virtual address field -->
+			<Field id="address" type="textfield" hidden="true"/>
+		</ConfigUI>
+	</Device>
+
+</Devices>
